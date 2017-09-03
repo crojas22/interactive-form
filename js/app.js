@@ -12,12 +12,25 @@ $(document).ready(function(){
     }
   });
 
+  // will create option element and selects it
+  $("#color option").each(function(){
+    $("#color option").hide();
+  })
+  const option = $("<option id='default'></option>").text("Please select a T-shirt theme");
+  $("#color").prepend(option);
+  $("#default").attr('selected','selected')
   // event listener will hide and show items depending on design
   $('#design').on('change',function(){
     // use of slice function to divide the two design section
-    let jsPuns = $('#color option').slice(0,3);
-    let jsHeart = $('#color option').slice(3,6);
-    if($(this).val() === 'js puns'){
+    let jsPuns = $('#color option').slice(1,4);
+    let jsHeart = $('#color option').slice(4,7);
+    if($(this).val() === 'Select Theme'){
+      $("#color option").each(function(){
+        $("#color option").hide();
+        $("#default").show();
+      })
+    } else if($(this).val() === 'js puns'){
+      $("#default").hide();
       jsHeart.each(function(){
         jsHeart.hide();
       });
@@ -27,6 +40,7 @@ $(document).ready(function(){
         jsPuns.show();
       })
     } else if($(this).val() === 'heart js'){
+      $("#default").hide();
       jsHeart.each(function(){
         jsHeart.show();
       });
